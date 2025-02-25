@@ -1,0 +1,48 @@
+pipeline {
+    agent any  // Runs the pipeline on any available agent
+
+    stages {
+        stage('Hello') {  // First stage - Hello
+            steps {
+                echo 'Hello World'  // Outputs "Hello World"
+            
+        }
+        
+        stage('Build') {  // Second stage - Build
+            steps {
+                echo 'Building the application'  // Outputs "Building the application"
+                // Add commands for build steps like compiling code, etc.
+            }
+        }
+        
+        stage('Test') {  // Third stage - Test
+            steps {
+                echo 'Running tests'  // Outputs "Running tests"
+                // You can add test execution commands here
+                // Example: sh './runTests.sh'
+            }
+        }
+        
+        stage('Deploy') {  // Fourth stage - Deploy
+            steps {
+                echo 'Deploying application'  // Outputs "Deploying application"
+                // Add your deployment steps here, like pushing to a server or a container
+                // Example: sh './deploy.sh'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'  // Outputs this message on successful pipeline execution
+        }
+        
+        failure {
+            echo 'Pipeline failed. Check the logs for errors.'  // Outputs this message if the pipeline fails
+        }
+        
+        always {
+            echo 'This step runs regardless of success or failure.'  // This will run after the pipeline completes
+        }
+    }
+}

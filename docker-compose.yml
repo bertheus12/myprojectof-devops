@@ -1,29 +1,10 @@
-version: '31.0'
+version: '47.1'
 
 services:
-  app:
-    image: python:3.9
-    container_name: my-python-app
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
+  24RP15432-php:
+    image: php:8.2.12-apache
+    container_name: 24RP15432-php
     volumes:
-      - .:/app
-    command: python app.py
-    depends_on:
-      - db
-
-  db:
-    image: postgres:14
-    container_name: my-postgres-db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
+      - "C:/xampp/htdocs/24RP15432:/var/www/html"
     ports:
-      - "5432:5432"
-
-volumes:
-  db_data: {}
+      - "8085:80"
