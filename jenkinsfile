@@ -1,33 +1,13 @@
 pipeline {
-    agent any  // Runs the pipeline on any available agent
-
+    agent any
+    tools { maven 'Maven 3.8.4' }
     stages {
-        stage('Hello') {  // First stage - Hello
+        stage('Build') {
             steps {
-                echo 'Hello World'  // Outputs "Hello World"
-            
-        }
-        
-        stage('Build') {  // Second stage - Build
-            steps {
-                echo 'Building the application'  // Outputs "Building the application"
-                // Add commands for build steps like compiling code, etc.
-            }
-        }
-        
-        stage('Test') {  // Third stage - Test
-            steps {
-                echo 'Running tests'  // Outputs "Running tests"
-                // You can add test execution commands here
-                // Example: sh './runTests.sh'
-            }
-        }
-        
-        stage('Deploy') {  // Fourth stage - Deploy
-            steps {
-                echo 'Deploying application'  
+                withMaven(maven: 'Maven 3.8.4') {
+                    sh 'mvn clean install'
+                }
             }
         }
     }
-}
 }
